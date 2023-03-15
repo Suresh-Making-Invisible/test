@@ -1,3 +1,4 @@
+
 name: Trigger API
 
 on:
@@ -20,3 +21,4 @@ jobs:
     - name: Send request to API
       run: |
         curl -X GET http://localhost:5000/config?APPLICATION=test&ENV_NAME=qa
+
