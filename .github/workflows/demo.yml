@@ -1,18 +1,22 @@
-name: Main
-'on':
-  push:
-    branches:
-      - main
+name: Trigger API
+
+on:
   pull_request:
+    types: [closed]
     branches:
       - main
+
 jobs:
-  build:
+  trigger-api:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Test
-        run: echo "running tests"
-      - name: Deploy
-        run: echo "Deploying"
-        if: github.ref == 'refs/heads/main'
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Start API server
+      run: npm start
+
+    - name: Send request to API
+      run: |
+        curl -X GET http://localhost:3000/api
